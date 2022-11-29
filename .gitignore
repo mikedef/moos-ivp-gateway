@@ -1,0 +1,29 @@
+# Project files
+.DS_Store
+.DS_Store?
+.cproject
+.phostinfo/
+.project
+.settings/
+.pydevproject
+__pycache__/
+
+
+# MOOS related
+CMakeCache.txt
+targ_*
+LOG_*/
+MOOS*/
+bin/
+build/
+# lib/
+.Last*
+logs/
+attic/
+*++
+
+# Emacs related                                                                
+*~                                                                             
+.\#*                                                                           
+\#*\#                                                                          
+*.bag

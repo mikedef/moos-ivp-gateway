@@ -1,0 +1,40 @@
+
+ServerHost   = localhost                                                                                
+ServerPort   = 9000                                                                                     
+Community    = gateway                                                                                  
+MOOSTimeWarp = 1                                                                                        
+                                                                                                        
+// Forest Lake                                                                                          
+LatOrigin  = 43.825300                                                                                  
+LongOrigin = -70.330400                                                                                 
+                                                                                                        
+// MIT Sailing Pavilion (use this one)                                                                  
+// LatOrigin  = 42.358456                                                                               
+// LongOrigin = -71.087589                                                                              
+                                                                                                        
+//------------------------------------------                                                            
+// Antler configuration  block                                                                          
+ProcessConfig = ANTLER                                                                                  
+{                                                                                                       
+  MSBetweenLaunches = 200                                                                               
+                                                                                                        
+  Run = MOOSDB        @ NewConsole = false                                                              
+  Run = iMOOSGateway          @ NewConsole = false
+}    
+
+	//------------------------------------------------
+// iMOOSGateway config block
+
+ProcessConfig = iMOOSGateway
+{
+   AppTick   = 4
+   CommsTick = 4
+
+	tcp_port = 1024
+  // comma separated moos variables to send to client
+	//forward_to_client = MOOS_VAR_TO_SEND, MOOS_VAR_TO_SEND
+	forward_to_client = DESIRED_HEADING, DESIRED_SPEED, IVPHELM_STATE, DB_TIME                     
+	// comma separated moos variables to block from client
+	block_from_client = MOOS_VAR_TO_BLOCK, MOOS_VAR_TO_BLOCK
+}
+
