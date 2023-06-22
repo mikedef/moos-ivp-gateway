@@ -34,7 +34,7 @@ ProcessConfig = iMOOSGateway
   AppTick  	= 4
   CommsTick	= 4
 
-  tcp_port = 1024
+  tcp_port = 9501
 	
 	// comma separated moos variables to send to client                                                 
   forward_to_client = DESIRED_HEADING, DESIRED_SPEED, DESIRED_RUDDER, DESIRED_THRUST, DEPLOY, IVPHELM_STATE, IVPHELM_ALLSTOP, IVPHELM_MODESET, DB_TIME

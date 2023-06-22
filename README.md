@@ -35,4 +35,21 @@ When `iMOOSGateway` receives a MOOS variable that is configured to be forwarded,
 
 When the client sends a `ToGateway` type protobuf message over the TCP link, unless if it's a blocked message, the `iMOOSGateway` application will publish it to the MOOSDB. The content of the incoming message could be a string or a double and will be posted to the MOOSDB as a `KEY-VALUE` pair. 
 
+## Dependencies                                                                                         
+* Google protocol buffers                                                                               
+  * `sudo apt install protobuf-compiler`                                                                
+* Base64 encode/decode                                                                                  
+  * `sudo apt install libb64-dev` 
 
+### Protobuf_client Test
+#### ROS
+
+#### ROS 2
+Sample test for when the Gateway is in use with the ROS 2 node `protobuf_client` https://github.com/mikedef/protobuf_client_ros2
+
+* Set the tcp_port to the desired port address in the iMOOSGateway config block
+* Launch the MOOS mission in 'moos-ivp-gateway/missions/moos-gateway-alpha'
+  * ./launch.sh
+* Set the `gateway_port` and `gateway_ip` in protobuf_client to match the iMOOSGateway settings. `gateway_port` must match `tcp_port`
+* Launch the gateway client application in ROS 2
+  * ros2 run protobuf_client protobuf_client_node
