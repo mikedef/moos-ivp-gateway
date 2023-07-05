@@ -1,9 +1,17 @@
 # Repo for the iMOOSGateway application
 
+## MOOS-IvP
+* Please review the MOOS-IvP (MIT 2.680) class labs for further information about MOOS-IvP
+  * https://oceanai.mit.edu/ivpman/pmwiki/pmwiki.php?n=Lab.HomePage2680
+
+* Don't forget to add the path to this repo to the bashrc file!!
+  * PATH=$PATH:~/moos-ivp-gateway/bin
+  * export PATH
+
 ## iMOOSGateway
 
 * MOOS application to connect to a client application, if used with the ROS node protobuf_client a ROS based client, to bridge key-value pairs between MOOS-IvP and a non-MOOS system
-  * see the `AUVLab/protobuf_cient` repository for the ROS based client node
+  * see the `mikedef/protobuf_client` or the `mikedef/protobuf_client_ros2` repository for the ROS based client node
 * `iMOOSGateway` allows for non-MOOS systems to publish MOOS variables into the MOOSDB
 * `iMOOSGateway` allows for the MOOSDB to publish MOOS variables into non-MOOS systems
 
