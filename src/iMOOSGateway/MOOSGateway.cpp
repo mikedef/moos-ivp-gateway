@@ -243,7 +243,7 @@ void MOOSGateway::handleMsgsFromClient(const moos::gateway::ToGateway& msg)
     reportRunWarning("Received a blocked message from the client: " + msg.client_key());
   }
   else{
-    gateway::util::serialize_for_moos_message(&serialized, msg);
+    // gateway::util::serialize_for_moos_message(&serialized, msg);
     //Notify(msg.client_key(), serialized);
     Notify(msg.client_key(), msg.client_string());
   }

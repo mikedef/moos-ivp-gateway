@@ -12,7 +12,7 @@
 #define MOOSGateway_HEADER
 
 #include "MOOS/libMOOS/Thirdparty/AppCasting/AppCastingMOOSApp.h"
-#include "util/protobuf_support_for_moos.h"
+//#include "util/protobuf_support_for_moos.h"
 #include "lib_gateway_protobuf/gateway.pb.h"
 #include "lib_gateway_tcp/tcp_server.h"
 
