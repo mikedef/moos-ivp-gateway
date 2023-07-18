@@ -15,8 +15,9 @@ targ_*
 LOG_*/
 MOOS*/
 bin/
+include/
 build/
-# lib/
+lib/
 .Last*
 logs/
 attic/
