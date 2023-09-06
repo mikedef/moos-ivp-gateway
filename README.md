@@ -41,7 +41,9 @@ ATE, IVPHELM_ALLSTOP, IVPHELM_MODESET, DB_TIME
 
 When `iMOOSGateway` receives a MOOS variable that is configured to be forwarded, depending on its type; i.e. string or double, the variable name and the content with be put into a `FromGateway` protobuf message, and sent over to the client using the TCP connection
 
-When the client sends a `ToGateway` type protobuf message over the TCP link, unless if it's a blocked message, the `iMOOSGateway` application will publish it to the MOOSDB. The content of the incoming message could be a string or a double and will be posted to the MOOSDB as a `KEY-VALUE` pair. 
+When the client sends a `ToGateway` type protobuf message over the TCP link, unless if it's a blocked message, the `iMOOSGateway` application will publish it to the MOOSDB. The content of the incoming message could be a string or a double and will be posted to the MOOSDB as a `KEY-VALUE` pair.
+
+See `moos-ivp-gateway/src/lib/lib_gateway_protobuf` for more information into the gateway.proto message definition
 
 ## Dependencies                                                                                         
 * Google protocol buffers                                                                               
