@@ -39,11 +39,13 @@ ATE, IVPHELM_ALLSTOP, IVPHELM_MODESET, DB_TIME
 
 `iMOOSGateway` runs a TCP server using `lib_gateway_tcp` (adopted from https://github.com/GobySoft/netsim/tree/master/src/lib/tcp), which allows the ROS based client (protobuf_client ROS node) to connect to as a TCP client, using the same library.
 
-When `iMOOSGateway` receives a MOOS variable that is configured to be forwarded, depending on its type; i.e. string or double, the variable name and the content with be put into a `FromGateway` protobuf message, and sent over to the client using the TCP connection
+When `iMOOSGateway` receives a MOOS variable that is configured to be forwarded in the `forward_to_client` parameter of the `iMOOSGateway` configuration block, depending on its type; i.e. string or double, the variable name and the content with be put into a `FromGateway` protobuf message, and sent over to the client using the TCP connection. 
 
 When the client sends a `ToGateway` type protobuf message over the TCP link, unless if it's a blocked message, the `iMOOSGateway` application will publish it to the MOOSDB. The content of the incoming message could be a string or a double and will be posted to the MOOSDB as a `KEY-VALUE` pair.
 
-See `moos-ivp-gateway/src/lib/lib_gateway_protobuf` for more information into the gateway.proto message definition
+Data to be sent from the MOOSDB to the client (protobuf_client) will be sent automatically. Data received from the client will be published to the MOOSDB automatically. 
+
+See `moos-ivp-gateway/src/lib/lib_gateway_protobuf` for more information into the gateway.proto message definition. Please note, the `gateway.proto` msg is defined in both the gateway and the client applications and must be identical. 
 
 ## Dependencies                                                                                         
 * Google protocol buffers                                                                               
