@@ -53,7 +53,7 @@ See `moos-ivp-gateway/src/lib/lib_gateway_protobuf` for more information into th
 * Base64 encode/decode                                                                                  
   * `sudo apt install libb64-dev` 
 
-### Protobuf_client Test
+### Client Test: `protobuf_client` 
 #### ROS 1
 * `protobuf_client:` https://github.com/mikedef/protobuf_client
 
