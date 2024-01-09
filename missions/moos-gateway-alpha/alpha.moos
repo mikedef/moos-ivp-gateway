@@ -3,7 +3,7 @@
 // FILE: alpha.moos
 //-------------------------------------------------
 
-ServerHost   = localhost
+ServerHost   = 172.17.0.1 //localhost
 ServerPort   = 9000
 Community    = gateway
 MOOSTimeWarp = 1

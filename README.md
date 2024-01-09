@@ -1,4 +1,4 @@
-# Repo for the iMOOSGateway application
+#  Repo for the iMOOSGateway application
 
 ## MOOS-IvP
 * Please review the MOOS-IvP (MIT 2.680) class labs for further information about MOOS-IvP
