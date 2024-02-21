@@ -1,8 +1,9 @@
-/***************************************************************/                                       
-/*    NAME: Supun Randeni and Michael DeFilippo                */                                       
-/*    ORGN: Dept of Mechanical Engineering, MIT, Cambridge MA  */                                       
-/*    FILE: MOOSGateway.h                                      */                                       
+/***************************************************************/
+/*    NAME: Supun Randeni and Michael DeFilippo                */
+/*    ORGN: Dept of Mechanical Engineering, MIT, Cambridge MA  */
+/*    FILE: MOOSGateway.h                                      */
 /*    DATE: 2022-11-04                                         */
+/* Copyrght MIT and author/s of software.                      */
 /* This is unreleased BETA code. no permission is granted or   */
 /* implied to use, copy, modify, and distribute this software  */
 /* except by the author(s), or those designated by the author. */
@@ -41,18 +42,18 @@ bool MOOSGateway::OnNewMail(MOOSMSG_LIST &NewMail)
     CMOOSMsg &msg = *p;
     string key    = msg.GetKey();
     double dval  = msg.GetDouble();
-    string sval  = msg.GetString(); 
+    string sval  = msg.GetString();
 
 #if 0 // Keep these around just for template
     string comm  = msg.GetCommunity();
     double dval  = msg.GetDouble();
-    string sval  = msg.GetString(); 
+    string sval  = msg.GetString();
     string msrc  = msg.GetSource();
     double mtime = msg.GetTime();
     bool   mdbl  = msg.IsDouble();
     bool   mstr  = msg.IsString();
 #endif
-        
+
     for (auto it : m_fwd_keys){
       if (key == it) {
 	cout << "Received a forward to client message: " << it << endl;
@@ -67,7 +68,7 @@ bool MOOSGateway::OnNewMail(MOOSMSG_LIST &NewMail)
       }
     }
   }
-	
+
   return(true);
 }
 
@@ -90,7 +91,7 @@ bool MOOSGateway::Iterate()
   // Do your thing here!
 
   m_io.poll();
-  
+
   AppCastingMOOSApp::PostReport();
   return(true);
 }
@@ -137,8 +138,8 @@ bool MOOSGateway::OnStartUp()
 
   // Define handles for message types coming through the interface
   defineIncomingInterfaceMsgs();
-  
-  registerVariables();	
+
+  registerVariables();
   return(true);
 }
 
@@ -226,7 +227,7 @@ void MOOSGateway::defineIncomingInterfaceMsgs()
 	else{
 	  std::cout << "Invalid message! No MOOS var." << std::endl;
 	}
-	
+
       });
 }
 
@@ -235,7 +236,7 @@ void MOOSGateway::defineIncomingInterfaceMsgs()
 void MOOSGateway::handleMsgsFromClient(const moos::gateway::ToGateway& msg)
 {
   std::string serialized;
-  
+
   // Check for blocked message
   cout << "Handle msg from client: " << endl;
 
@@ -281,7 +282,7 @@ void MOOSGateway::handleMsgsToClientString(std::string key, std::string sval)
 //------------------------------------------------------------
 // Procedure: buildReport()
 
-bool MOOSGateway::buildReport() 
+bool MOOSGateway::buildReport()
 {
   m_msgs << "============================================" << endl;
   m_msgs << "File:                                       " << endl;

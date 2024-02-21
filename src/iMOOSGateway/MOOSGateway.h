@@ -3,9 +3,10 @@
 /*    ORGN: Dept of Mechanical Engineering, MIT, Cambridge MA  */
 /*    FILE: MOOSGateway.h                                      */
 /*    DATE: 2022-11-04                                         */
-/* This is unreleased BETA code. no permission is granted or   */                                       
-/* implied to use, copy, modify, and distribute this software  */                                       
-/* except by the author(s), or those designated by the author. */ 
+/* Copyrght MIT and author/s of software.                      */
+/* This is unreleased BETA code. no permission is granted or   */
+/* implied to use, copy, modify, and distribute this software  */
+/* except by the author(s), or those designated by the author. */
 /***************************************************************/
 
 #ifndef MOOSGateway_HEADER
@@ -26,15 +27,15 @@ class MOOSGateway : public AppCastingMOOSApp
    MOOSGateway();
    ~MOOSGateway();
 
- protected: // Standard MOOSApp functions to overload  
+ protected: // Standard MOOSApp functions to overload
    bool OnNewMail(MOOSMSG_LIST &NewMail);
    bool Iterate();
    bool OnConnectToServer();
    bool OnStartUp();
 
- protected: // Standard AppCastingMOOSApp function to overload 
+ protected: // Standard AppCastingMOOSApp function to overload
    bool buildReport();
-  
+
  protected:
    void registerVariables();
   bool setConfigForwardToClient(std::string);
@@ -61,4 +62,4 @@ class MOOSGateway : public AppCastingMOOSApp
   std::set<std::string> m_blocked_keys; // m_blocked_msgs
 };
 
-#endif 
+#endif
