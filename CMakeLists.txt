@@ -29,20 +29,20 @@ SET( RUNTIME_OUTPUT_DIRECTORY "${IVP_EXTEND_BIN_DIR}"  CACHE PATH "" )
 
 include_directories(${IVP_EXTEND_INC_DIR})
 
-#=======================================================================                                
-# Find Protocol buffers                                                                                 
-#=======================================================================                                
-                                                                                                        
-# protocol buffers - http://code.google.com/apis/protocolbuffers/                                       
-find_package(ProtobufLocal REQUIRED)                                                                    
-include_directories(${PROTOBUF_INCLUDE_DIRS})                                                           
-                                                                                                        
-if(${PROTOC_VERSION} VERSION_LESS 2.5.0})                                                               
-  message("libprotobuf < 2.5.0")                                                                        
-else()                                                                                                  
-  message("libprotobuf >= 2.5.0")                                                                       
-  set(PROTOBUF_ALLOW_ALIAS "option allow_alias = true;")                                                
-endif() 
+#=======================================================================
+# Find Protocol buffers
+#=======================================================================
+
+# protocol buffers - http://code.google.com/apis/protocolbuffers/
+find_package(ProtobufLocal REQUIRED)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+
+if(${PROTOC_VERSION} VERSION_LESS 2.5.0})
+  message("libprotobuf < 2.5.0")
+else()
+  message("libprotobuf >= 2.5.0")
+  set(PROTOBUF_ALLOW_ALIAS "option allow_alias = true;")
+endif()
 
 #=======================================================================
 # Find MOOS
@@ -50,17 +50,17 @@ endif()
 find_package(MOOS 10.0)
 INCLUDE_DIRECTORIES(${MOOS_INCLUDE_DIRS})
 
-#=============================================================================                          
-# FINDING MOOSGeodesy' HEADERS AND LIBRARIES...                                                         
-#=============================================================================                          
-find_package(MOOSGeodesy)                                                                               
-include_directories(${MOOSGeodesy_INCLUDE_DIRS})                                                        
-link_directories(${MOOSGeodesy_LIBRARY_PATH})                                                           
-                                                                                                        
-message("+++++++++++++++++++++++++++++++++++++++++")                                                    
-message("MOOSGeodesy_INCLUDE_DIRS:" ${MOOSGeodesy_INCLUDE_DIRS})                                        
-message("MOOSGeodesy_LIB_PATH:"     ${MOOSGeodesy_LIBRARY_PATH})                                        
-message("+++++++++++++++++++++++++++++++++++++++++")    
+#=============================================================================
+# FINDING MOOSGeodesy' HEADERS AND LIBRARIES...
+#=============================================================================
+find_package(MOOSGeodesy)
+include_directories(${MOOSGeodesy_INCLUDE_DIRS})
+link_directories(${MOOSGeodesy_LIBRARY_PATH})
+
+message("+++++++++++++++++++++++++++++++++++++++++")
+message("MOOSGeodesy_INCLUDE_DIRS:" ${MOOSGeodesy_INCLUDE_DIRS})
+message("MOOSGeodesy_LIB_PATH:"     ${MOOSGeodesy_LIBRARY_PATH})
+message("+++++++++++++++++++++++++++++++++++++++++")
 
 #=======================================================================
 # Find the "moos-ivp" base directory
@@ -90,34 +90,34 @@ INCLUDE_DIRECTORIES(${IVP_INCLUDE_DIRS})
 FILE(GLOB IVP_LIBRARY_DIRS ${MOOSIVP_SOURCE_TREE_BASE}/lib )
 LINK_DIRECTORIES(${IVP_LIBRARY_DIRS})
 
-#=======================================================================                                
-# Find the "Boost"                                                                                      
-#=======================================================================                                
-                                                                                                        
-# boost - http://www.boost.org/                                                                         
+#=======================================================================
+# Find the "Boost"
+#=======================================================================
+
+# boost - http://www.boost.org/
 #find_package(Boost 1.55.0 REQUIRED date_time thread system program_options filesystem regex serializati
-#on)                                                                                                    
-                                                                                                        
-#include_directories(${Boost_INCLUDE_DIRS})                                                             
-                                                                                                        
-                                                                                                        
-                                                                                                        
-#=======================================================================                                
-# Find the "B64"                                                                                        
-#=======================================================================                                
-                                                                                                        
-# b64 for the interface                                                                                 
-find_package(B64 REQUIRED)                                                                              
-set(B64_DOC_STRING "Enable base64 functionality (requires libb64-dev: http://libb64.sourceforge.net/")  
-if(B64_FOUND)                                                                                           
-  option(enable_b64 ${B64_DOC_STRING} ON)                                                               
-else()                                                                                                  
-  option(enable_b64 ${B64_DOC_STRING} OFF)                                                              
+#on)
+
+#include_directories(${Boost_INCLUDE_DIRS})
+
+
+
+#=======================================================================
+# Find the "B64"
+#=======================================================================
+
+# b64 for the interface
+find_package(B64 REQUIRED)
+set(B64_DOC_STRING "Enable base64 functionality (requires libb64-dev: http://libb64.sourceforge.net/")
+if(B64_FOUND)
+  option(enable_b64 ${B64_DOC_STRING} ON)
+else()
+  option(enable_b64 ${B64_DOC_STRING} OFF)
   message(">> setting enable_b64 to OFF ... if you need this functionality: 1) install libb64-dev; 2) ru
-n cmake -Denable_b64=ON")                                                                               
-endif()                                                                                                 
-include_directories(${B64_INCLUDE_DIRS})                                                                
-                                            
+n cmake -Denable_b64=ON")
+endif()
+include_directories(${B64_INCLUDE_DIRS})
+
 
 #======================================================================
 # Specify Compiler Flags
@@ -128,7 +128,7 @@ IF( ${WIN32} )
    #---------------------------------------------
    IF(MSVC)
       # Flags for Microsoft Visual Studio
-      SET( WALL_ON OFF CACHE BOOL 
+      SET( WALL_ON OFF CACHE BOOL
          "tell me about all compiler warnings (-Wall) ")
       IF(WALL_ON)
          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -147,13 +147,13 @@ ELSE( ${WIN32} )
    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -g -Wdeprecated-declarations")
    IF(CMAKE_COMPILER_IS_GNUCXX)
       # Flags for the GNU C++ Compiler
-      SET( WALL_ON OFF CACHE BOOL 
+      SET( WALL_ON OFF CACHE BOOL
          "tell me about all compiler warnings (-Wall) ")
       IF(WALL_ON)
          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" -C++11)
       ENDIF( WALL_ON)
    ELSE(CMAKE_COMPILER_IS_GNUCXX)
-    
+
    ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 
 ENDIF( ${WIN32} )

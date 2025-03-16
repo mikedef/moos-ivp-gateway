@@ -1,20 +1,25 @@
-syntax = "proto2";
-package moos.gateway;  // Namespace for grabbing messages
+syntax = "proto3";
 
-//-----------------------------------------------
-//  Gateway interface
-//------------------------------------------------
+package moos.gateway;
 
 message FromGateway {
-  optional double	gateway_time   = 1;
-  optional string	gateway_key    = 2;
-  optional string	gateway_string = 3;
-  optional double	gateway_double = 4;
+  string robot_id = 1;
+  double gateway_time = 2;
+  string gateway_key = 3;
+  
+  oneof value {
+    string gateway_string = 4;
+    double gateway_double = 5;
+  }
 }
 
 message ToGateway {
-  optional double	client_time   = 1;
-  optional string	client_key    = 2;
-  optional string	client_string = 3;
-  optional double	client_double = 4;
+  string robot_id = 1;
+  double client_time = 2;
+  string client_key = 3;
+
+  oneof value {
+    string client_string = 4;
+    double client_double = 5;
+  }
 }

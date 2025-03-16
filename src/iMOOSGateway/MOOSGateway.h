@@ -60,6 +60,7 @@ class MOOSGateway : public AppCastingMOOSApp
   std::string m_keys;
   std::set<std::string> m_fwd_keys;    // m_fwd_msgs
   std::set<std::string> m_blocked_keys; // m_blocked_msgs
+  std::string m_robot_id;
 };
 
 #endif

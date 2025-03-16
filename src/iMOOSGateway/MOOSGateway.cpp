@@ -130,6 +130,11 @@ bool MOOSGateway::OnStartUp()
     else if(param == "block_from_client") {
       handled = setConfigBlockFromClient(value);
     }
+    else if(param == "robot_id") {
+      m_robot_id = value;
+      MOOSTrace(" Robot ID = %s \n", m_robot_id);
+      handled = true;
+    }
 
     if(!handled)
       reportUnhandledConfigWarning(orig);
@@ -220,7 +225,7 @@ void MOOSGateway::defineIncomingInterfaceMsgs()
 	m_last_msg = msg.ShortDebugString();
 
 	// Sorting the data provided by the client
-	if(msg.has_client_key())
+	if(!msg.client_key().empty())
 	{
 	  handleMsgsFromClient(msg);
 	}
@@ -262,6 +267,7 @@ void MOOSGateway::handleMsgsToClientDouble(std::string key, double dval)
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_double(dval);
+  from_gateway.set_robot_id(m_robot_id);
 
   if(m_client_connected){
     m_server->write(from_gateway, *m_end_point);
@@ -276,6 +282,7 @@ void MOOSGateway::handleMsgsToClientString(std::string key, std::string sval)
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_string(sval);
+  from_gateway.set_robot_id(m_robot_id);
 
   if(m_client_connected){
     m_server->write(from_gateway, *m_end_point);
@@ -296,6 +303,7 @@ bool MOOSGateway::buildReport()
   //actab << "Alpha | Bravo | Charlie | Delta";
   //actab.addHeaderLines();
   actab << "Connected: " << m_client_connected;
+  actab << "Robot: " << m_robot_id;
   actab << "Last Msg: " << m_last_msg;
   actab << "Keys: " << m_keys;
   m_msgs << actab.getFormattedString();
