@@ -3,10 +3,10 @@ syntax = "proto3";
 package moos.gateway;
 
 message FromGateway {
-  string robot_id = 1;
+  string gateway_robot_id = 1;
   double gateway_time = 2;
   string gateway_key = 3;
-  
+
   oneof value {
     string gateway_string = 4;
     double gateway_double = 5;
@@ -14,7 +14,7 @@ message FromGateway {
 }
 
 message ToGateway {
-  string robot_id = 1;
+  string client_robot_id = 1;
   double client_time = 2;
   string client_key = 3;
 

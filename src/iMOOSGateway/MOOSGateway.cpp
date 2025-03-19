@@ -267,7 +267,7 @@ void MOOSGateway::handleMsgsToClientDouble(std::string key, double dval)
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_double(dval);
-  from_gateway.set_robot_id(m_robot_id);
+  from_gateway.set_gateway_robot_id(m_robot_id);
 
   if(m_client_connected){
     m_server->write(from_gateway, *m_end_point);
@@ -282,7 +282,7 @@ void MOOSGateway::handleMsgsToClientString(std::string key, std::string sval)
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_string(sval);
-  from_gateway.set_robot_id(m_robot_id);
+  from_gateway.set_gateway_robot_id(m_robot_id);
 
   if(m_client_connected){
     m_server->write(from_gateway, *m_end_point);

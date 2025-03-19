@@ -1,0 +1,22 @@
+//------------------------------------------------
+// iMOOSClient config block
+
+ProcessConfig = iMOOSClient
+{
+   AppTick   = 20
+   CommsTick = 20
+
+	// Port that rely is hosted on
+	relay_port = 5000
+	// IP that relay is hosted on
+	relay_ip = "127.0.0.1"
+  // comma separated moos variables to send to client
+	//forward_to_client = MOOS_VAR_TO_SEND, MOOS_VAR_TO_SEND
+	forward_to_relay = DESIRED_HEADING, DESIRED_SPEED, IVPHELM_STATE
+	// comma separated moos variables to block from client
+	//block_from_relay = MOOS_VAR_TO_BLOCK, MOOS_VAR_TO_BLOCK
+
+	// robot_id
+	robot_id = robot_name //$(VNAME)  use macro if available
+}
+

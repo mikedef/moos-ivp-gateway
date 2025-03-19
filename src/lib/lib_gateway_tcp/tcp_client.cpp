@@ -33,15 +33,17 @@ void gateway::tcp_client::connect(const std::string& server, unsigned short port
 
     boost::asio::async_connect(
         *socket(), endpoints,
-#if BOOST_VERSION < 106600
-        [this](const boost::system::error_code& error, boost::asio::ip::tcp::resolver::iterator i)
-#else
-        [this](const boost::system::error_code& error, boost::asio::ip::tcp::endpoint i)
-#endif
+        [this, server, port](const boost::system::error_code& error, boost::asio::ip::tcp::endpoint i)
         {
-            if (!error)
+            if (!error) {
+                std::cout << "Connected successfully to " << server << ":" << port << std::endl;
                 start();
-            else
-                throw(error);
+            } else {
+                std::cerr << "Connection failed to " << server << ":" << port
+                          << " - Error: " << error.message() << std::endl;
+            }
         });
+    // Run the io_service in a separate thread so that async_connect completes
+    std::thread([this]() { io_service_.run(); }).detach();
 }
+

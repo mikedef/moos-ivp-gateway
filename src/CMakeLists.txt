@@ -18,6 +18,7 @@ INCLUDE_DIRECTORIES(${LOCAL_LIBRARY_DIRS})
 #
 ADD_SUBDIRECTORY(lib) # build your library first
 ADD_SUBDIRECTORY(iMOOSGateway)
+ADD_SUBDIRECTORY(iMOOSClient)
 
 ##############################################################################
 #                           END of CMakeLists.txt
