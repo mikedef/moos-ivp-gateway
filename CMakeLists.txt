@@ -7,7 +7,7 @@
 #=======================================================================
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
-PROJECT( moos_ivp_gateway )
+project(moos_ivp_gateway)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/")
 
 set (CMAKE_CXX_STANDARD 11)
@@ -175,3 +175,19 @@ ENDIF( ${WIN32} )
 # Add Subdirectories
 #=======================================================================
 ADD_SUBDIRECTORY( src )
+
+# --- Optional ROS/ament integration -----------------------------------------
+option(ENABLE_AMENT "Enable ament/ROS 2 indexing if available" ON)
+if(ENABLE_AMENT)
+  find_package(ament_cmake QUIET)
+  if(ament_cmake_FOUND)
+    install(DIRECTORY
+      missions
+      DESTINATION share/${PROJECT_NAME}
+    )
+    # (Optional) expose headers/libs via ament export, register resources, etc.
+    # ament_export_targets(core_lib HAS_LIBRARY_TARGET)
+    # ament_index_register_resource(RESOURCE index RESOURCE_NAME ${PROJECT_NAME})
+    ament_package()
+  endif()
+endif()
