@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>moos_ivp_gateway</name>
+  <version>0.1.0</version>
+  <description>MOOS-IVP gateway ROS 2 package</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <!-- No run-time ROS deps needed if you don’t actually depend on ROS packages -->
+</package>
