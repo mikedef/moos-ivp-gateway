@@ -8,4 +8,8 @@
   <license>BSD-3-Clause</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
   <!-- No run-time ROS deps needed if you don’t actually depend on ROS packages -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>
