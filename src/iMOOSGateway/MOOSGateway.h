@@ -37,7 +37,7 @@ class MOOSGateway : public AppCastingMOOSApp
    bool buildReport();
 
  protected:
-   void registerVariables();
+  void registerVariables();
   bool setConfigForwardToClient(std::string);
   bool setConfigBlockFromClient(std::string);
   void defineIncomingInterfaceMsgs();
@@ -45,10 +45,10 @@ class MOOSGateway : public AppCastingMOOSApp
   void handleMsgsToClientDouble(std::string, double);
   void handleMsgsToClientString(std::string, std::string);
 
- private: // Configuration variables
+private: // Configuration variables
 
- private: // State variables
-  std::string m_last_msg;
+private: // State variables
+  std::string m_last_msg;  // Remove?
 
   // Interface related
   boost::asio::io_service m_io;

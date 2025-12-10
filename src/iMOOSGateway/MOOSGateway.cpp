@@ -3,7 +3,8 @@
 /*    ORGN: Dept of Mechanical Engineering, MIT, Cambridge MA  */
 /*    FILE: MOOSGateway.h                                      */
 /*    DATE: 2022-11-04                                         */
-/* Copyright MIT and author/s of software.                     */
+/*    EDIT: 2025-10-10                                         */
+/* Copyright (c) 2025 MIT and author/s of software.            */
 /* This is unreleased BETA code. no permission is granted or   */
 /* implied to use, copy, modify, and distribute this software  */
 /* except by the author(s), or those designated by the author. */
@@ -214,10 +215,10 @@ void MOOSGateway::defineIncomingInterfaceMsgs()
     [this](const moos::gateway::ToGateway& msg,
 	   const boost::asio::ip::tcp::endpoint& ep)
       {
-	if (!m_client_connected){
-	  m_end_point.reset(new asio::ip::tcp::endpoint(ep));
-	  m_client_connected = true;
-	}
+	// Always update the endpoint (allows reconnection)
+	m_end_point.reset(new asio::ip::tcp::endpoint(ep));
+	m_client_connected = true;
+
 	cout << "Data rcvd from client: " << ep << endl;
 	cout << "Msg: " << msg.ShortDebugString() << endl;
 	// Notify raw msg to DB
@@ -263,14 +264,25 @@ void MOOSGateway::handleMsgsFromClient(const moos::gateway::ToGateway& msg)
 // Procedure: handleMsgsToClientDouble()
 void MOOSGateway::handleMsgsToClientDouble(std::string key, double dval)
 {
+  // Check if client is connected
+  if (!m_client_connected || !m_end_point) {
+    // No client connected, skip sending
+    return;
+  }
+
   moos::gateway::FromGateway from_gateway;
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_double(dval);
   from_gateway.set_gateway_robot_id(m_robot_id);
 
-  if(m_client_connected){
+  try {
     m_server->write(from_gateway, *m_end_point);
+  } catch (const std::exception& e) {
+    // Client disconnected, clear connection state
+    reportRunWarning("Client disconnected: " + string(e.what()));
+    m_client_connected = false;
+    m_end_point.reset();
   }
 }
 
@@ -278,14 +290,25 @@ void MOOSGateway::handleMsgsToClientDouble(std::string key, double dval)
 // Procedure: handleMsgsToClientString()
 void MOOSGateway::handleMsgsToClientString(std::string key, std::string sval)
 {
+  // Check if client is connected
+  if (!m_client_connected || !m_end_point) {
+    // No client connected, skip sending
+    return;
+  }
+
   moos::gateway::FromGateway from_gateway;
   from_gateway.set_gateway_time(MOOSTime());
   from_gateway.set_gateway_key(key);
   from_gateway.set_gateway_string(sval);
   from_gateway.set_gateway_robot_id(m_robot_id);
 
-  if(m_client_connected){
+  try {
     m_server->write(from_gateway, *m_end_point);
+  } catch (const std::exception& e) {
+    // Client disconnected, clear connection state
+    reportRunWarning("Client disconnected: " + string(e.what()));
+    m_client_connected = false;
+    m_end_point.reset();
   }
 }
 

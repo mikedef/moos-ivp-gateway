@@ -1,14 +1,14 @@
 ##############################################################################
-# FILE:        moos-ivp-ssci/src/lib/CMakeLists.txt
+# FILE:        moos-ivp-gateway/src/lib/CMakeLists.txt
 # DATE:        2022-08-23
 # NAME:        mikedef
 # DESCRIPTION: CMakeLists.txt file for the moos-ivp-ssci src/lib directory
 ##############################################################################
 
-## copy headers to /include                                                                             
-file(GLOB_RECURSE INCLUDE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h *.proto *.hpp)    
+## copy headers to /include
+file(GLOB_RECURSE INCLUDE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h *.proto *.hpp)
 foreach(I ${INCLUDE_FILES})
-  configure_file(${I} ${IVP_EXTEND_INC_DIR}/${I} @ONLY)                
+  configure_file(${I} ${IVP_EXTEND_INC_DIR}/${I} @ONLY)
 endforeach()
 
 
